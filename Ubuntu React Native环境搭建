@@ -1,0 +1,111 @@
+Ubuntu React Native环境搭建
+
+1. 先下载homebrew的linux版本linuxbrew.
+ruby -e"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
+2. 安装linuxbrew。仅允许root以外的用户进行安装
+sudo apt-get install build-essential
+3. 设置brew环境
+1)由于linuxbrew在linux下是一个隐藏性的文件夹.这里我们使用
+ls -a，显示：
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	 2）配置环境：brew 所在的路径为:home/系统当前的用户（无root权限）/linuxbrew/bin.
+	
+	export PATH="/home/系统当前的用户（无root权限）/.linuxbrew/bin:	$ANDROID_HOME:$PATH"
+	
+	export MANPATH="/home/系统当前的用户（无root权限）/.linuxbrew/share/man:	$MANPATH"
+	
+	export INFOPATH="/home/系统当前的用户（无root权限）/.linuxbrew/share/info:	$INFOPATH"
+	
+4.安装brew以后，为保证后续安装成功。需要安装nodejs以外的依赖包信息。
+   sudo apt-get install libxml2-dev libxslt1-dev python-dev
+   sudo apt-get install zlib1g-dev
+   sudo apt-get install libevent-dev
+   sudo apt-get install libtool
+
+5.按照官方的说法，是需要使用brew 来安装watchman的。然而在mac上可以安装成功，而在ubuntu上无法安装成功。为了保证后续nodejs能够稳定的运行。这里直接采用make的方式直接从watchman官方下载，直接编译。
+   a、mac方式：
+	   brew install watchman
+   b、ubuntu方式（防止踩坑）：
+          1.安装依赖：
+	   sudo apt-get install autoconf automake python-dev.
+	   2.安装watchman.
+	   $ git clone https://github.com/facebook/watchman.git
+	   $ cd watchman
+          $ git checkout v4.3.0  # the latest stable release
+	   $ ./autogen.sh
+	   $ ./configure
+	   $ make
+	   $ sudo make install
+6.安装nodejs运行环境。我们知道facebook使用的是react架构，因此我们需要使用nodejs来监控我们的程序运行情况。
+	sudo apt-get install curl
+	curl --silent --location https://deb.nodesource.com/setup_4.x | sudo bash -
+	sudo apt-get install nodejs
+
+7.安装nodejs完成后,来进行react-native的操作。
+ $ npm install -g react-native-cli
+
+8.创建react-native项目。由于我的项目是存在/home/react-native/react-native下。执行初始化操作：
+#root@richsjeson:/home/react-native/react-native# react-native init AwesomeProject
+
+9.配置android_home环境.本机路径存放地址：sdk/android_sdk
+export ANDROID_HOME=/sdk/android_sdk
+export PATH="/home/richsjeson/.linuxbrew/bin:$ANDROID_HOME:$PATH"
+
+10.运行react-native server,监控APP运行状况：
+1）设置模拟器和启动genyomation模拟器。这里使用genyomation.
+2）启动react-native-server。
+root@richsjeson:/home/react-native/react-native# cd Awes*
+root@richsjeson:/home/react-native/react-native/AwesomeProject# ls
+		android  index.android.js  index.ios.js  ios  node_modules  package.json
+root@richsjeson:/home/react-native/react-native/AwesomeProject#  react-native start
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+当程序执行到Building Dependency Graph时，这时候，就是要求你启动模拟器了。一开始并不知道是这个情况。所以屡次实验失败。
+
+3)  启动 react-native -android项目，并执行编译操作. 
+ $ react-native run-android
+4)编译完成后。自行启动应用程序。
+
+
+
+
+5）后台打印
+
+
+
+
