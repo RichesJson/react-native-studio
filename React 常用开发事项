@@ -19,7 +19,7 @@
     (Android 5.0及以上)使用adb reverse命令
     注意，这个选项只能在5.0以上版本(API 21+)的安卓设备上使用。
     首先把你的设备通过USB数据线连接到电脑上，并开启USB调试（关于如何开启USB调试，参见上面的章节）。
-    https://cloud.githubusercontent.com/assets/14167720/12305047/f84dc922-ba04-11e5-906b-7baad81fe718.png
+  
     运行adb reverse tcp:8081 tcp:8081
     你应该会看到一个“红屏”错误提示。这是正常的，下面的步骤会解决这个报错。
     摇晃设备，或者运行adb shell input keyevent 82，可以打开开发者菜单。
@@ -31,3 +31,6 @@
     在Linux上你可以在终端中输入ifconfig来查询你的IP地址。
     回到开发者菜单然后选择Reload JS。完成配置
 二、使用google chrome React Developer Tools 监听真机内部布局
+三、使用react-native bundle 进行打包
+相关资料：
+http://www.solinx.co/archives/507
