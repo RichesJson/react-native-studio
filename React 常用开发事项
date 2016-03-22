@@ -34,3 +34,10 @@
 三、使用react-native bundle 进行打包
 相关资料：
 http://www.solinx.co/archives/507
+
+编译指令：
+react-native bundle --platform android --dev false --entry-file index.android.js \
+  --bundle-output android/app/src/main/assets/index.android.bundle \
+  --assets-dest android/app/src/main/res/
+//使用插件  
+https://github.com/facebook/react-native/blob/0ff3a421c9adbe4137e07e158c9812062b34ea5a/react-native-gradle/README.md
